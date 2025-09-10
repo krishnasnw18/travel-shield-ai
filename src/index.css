@@ -117,7 +117,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
     background: radial-gradient(ellipse at top, hsl(210 11% 8%), hsl(210 11% 6%));
     min-height: 100vh;
   }
