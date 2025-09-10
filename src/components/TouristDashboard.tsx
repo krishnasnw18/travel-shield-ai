@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { MapPin, Shield, AlertTriangle, Phone, Cloud, Navigation, Heart, Users, Star } from 'lucide-react';
+import { MapPin, Shield, AlertTriangle, Phone, Cloud, Navigation, Heart, Users, Star, Car, Wallet, Bot, Activity } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import WeatherWidget from './WeatherWidget';
 import SafetyMap from './SafetyMap';
 import EmergencyPanel from './EmergencyPanel';
 import TouristProfile from './TouristProfile';
+import SmartTransportation from './SmartTransportation';
+import DigitalTravelWallet from './DigitalTravelWallet';
+import AdvancedHealthMonitoring from './AdvancedHealthMonitoring';
+import AIPoweredTravelAssistant from './AIPoweredTravelAssistant';
 
 const TouristDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -13,8 +17,12 @@ const TouristDashboard = () => {
   
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Shield },
+    { id: 'transport', label: 'Transport', icon: Car },
+    { id: 'wallet', label: 'Wallet', icon: Wallet },
+    { id: 'health', label: 'Health', icon: Activity },
+    { id: 'ai', label: 'AI Assistant', icon: Bot },
     { id: 'profile', label: 'Profile', icon: Users },
-    { id: 'map', label: 'Safety Map', icon: MapPin },
+    { id: 'map', label: 'Map', icon: MapPin },
     { id: 'emergency', label: 'Emergency', icon: AlertTriangle },
   ];
 
@@ -26,6 +34,14 @@ const TouristDashboard = () => {
         return <SafetyMap />;
       case 'emergency':
         return <EmergencyPanel />;
+      case 'transport':
+        return <SmartTransportation />;
+      case 'wallet':
+        return <DigitalTravelWallet />;
+      case 'health':
+        return <AdvancedHealthMonitoring />;
+      case 'ai':
+        return <AIPoweredTravelAssistant />;
       default:
         return (
           <div className="space-y-6">
