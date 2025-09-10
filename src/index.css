@@ -2,41 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Smart Tourist Safety App Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Core Color Palette */
+    --background: 210 11% 7%;          /* Charcoal Black #121212 */
+    --foreground: 0 0% 100%;           /* Pure White #FFFFFF */
+    
+    --card: 210 11% 10%;               /* Slightly lighter than background */
+    --card-foreground: 0 0% 100%;      /* Pure White */
+    
+    --popover: 210 11% 8%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 0 0% 100%;              /* Pure White */
+    --primary-foreground: 210 11% 7%;  /* Charcoal Black */
+    
+    --secondary: 210 8% 18%;           /* Slate Grey #2D2D2D */
+    --secondary-foreground: 0 0% 100%; /* Pure White */
+    
+    --accent: 185 100% 50%;            /* Neon Cyan #00E5FF */
+    --accent-foreground: 210 11% 7%;   /* Charcoal Black */
+    
+    --danger: 348 100% 61%;            /* Red #FF1744 */
+    --danger-foreground: 0 0% 100%;    /* Pure White */
+    
+    --muted: 210 8% 18%;               /* Slate Grey */
+    --muted-foreground: 210 14% 65%;   /* Lighter grey for text */
+    
+    --border: 210 8% 25%;              /* Slim borders */
+    --input: 210 8% 15%;               /* Input backgrounds */
+    --ring: 185 100% 50%;              /* Accent for focus */
+    
+    --radius: 0.75rem;
+    
+    /* Glass Effect Variables */
+    --glass-bg: 210 11% 10% / 0.8;     /* Semi-transparent card background */
+    --glass-border: 210 8% 25% / 0.3;  /* Subtle glass borders */
+    
+    /* Gradient Variables */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(185 100% 60%));
+    --gradient-danger: linear-gradient(135deg, hsl(var(--danger)), hsl(348 100% 70%));
+    
+    /* Shadow Variables */
+    --shadow-glow: 0 0 30px hsl(var(--accent) / 0.3);
+    --shadow-card: 0 8px 32px hsl(210 11% 4% / 0.4);
+    --shadow-danger: 0 0 20px hsl(var(--danger) / 0.4);
+    
+    /* Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +117,100 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter antialiased;
+    background: radial-gradient(ellipse at top, hsl(210 11% 8%), hsl(210 11% 6%));
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Glass Card Components */
+  .glass-card {
+    @apply bg-[hsl(var(--glass-bg))] backdrop-blur-xl border-[0.5px] border-[hsl(var(--glass-border))];
+    @apply shadow-[var(--shadow-card)] rounded-xl;
+    transition: var(--transition-smooth);
+  }
+  
+  .glass-card:hover {
+    @apply border-accent/20;
+    box-shadow: var(--shadow-card), 0 0 20px hsl(var(--accent) / 0.1);
+  }
+  
+  /* Professional Button Variants */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+    @apply border border-primary/20 transition-all duration-300;
+  }
+  
+  .btn-accent {
+    @apply bg-gradient-to-r from-accent to-accent/80 text-accent-foreground;
+    @apply border border-accent/30 hover:border-accent/50;
+    @apply shadow-[var(--shadow-glow)] transition-all duration-300;
+  }
+  
+  .btn-danger {
+    @apply bg-gradient-to-r from-danger to-danger/80 text-danger-foreground;
+    @apply border border-danger/30 hover:border-danger/50;
+    @apply shadow-[var(--shadow-danger)] transition-all duration-300;
+  }
+  
+  /* Navigation & Layout */
+  .nav-item {
+    @apply px-4 py-2 rounded-lg transition-all duration-300;
+    @apply hover:bg-accent/10 hover:text-accent;
+    @apply border border-transparent hover:border-accent/20;
+  }
+  
+  .nav-item.active {
+    @apply bg-accent/15 text-accent border-accent/30;
+  }
+  
+  /* Form Inputs */
+  .input-modern {
+    @apply bg-input border-[0.5px] border-border/50 rounded-lg;
+    @apply focus:border-accent focus:ring-2 focus:ring-accent/20;
+    @apply transition-all duration-300 backdrop-blur-sm;
+  }
+  
+  /* Animations */
+  .slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .pulse-accent {
+    animation: pulseAccent 2s ease-in-out infinite;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseAccent {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--accent) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 15px hsl(var(--accent) / 0);
   }
 }
