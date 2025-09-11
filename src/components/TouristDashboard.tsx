@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { MapPin, Shield, AlertTriangle, Phone, Cloud, Navigation, Heart, Users, Star, Car, Wallet, Bot, Activity } from 'lucide-react';
+import { MapPin, Shield, AlertTriangle, Phone, Cloud, Navigation, Heart, Users, Star, User, Calendar, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import WeatherWidget from './WeatherWidget';
 import SafetyMap from './SafetyMap';
 import EmergencyPanel from './EmergencyPanel';
-import TouristProfile from './TouristProfile';
-import SmartTransportation from './SmartTransportation';
-import DigitalTravelWallet from './DigitalTravelWallet';
-import AdvancedHealthMonitoring from './AdvancedHealthMonitoring';
-import AIPoweredTravelAssistant from './AIPoweredTravelAssistant';
 
 const TouristDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -17,34 +13,68 @@ const TouristDashboard = () => {
   
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Shield },
-    { id: 'transport', label: 'Transport', icon: Car },
-    { id: 'wallet', label: 'Wallet', icon: Wallet },
-    { id: 'health', label: 'Health', icon: Activity },
-    { id: 'ai', label: 'AI Assistant', icon: Bot },
-    { id: 'profile', label: 'Profile', icon: Users },
     { id: 'map', label: 'Map', icon: MapPin },
     { id: 'emergency', label: 'Emergency', icon: AlertTriangle },
   ];
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'profile':
-        return <TouristProfile />;
       case 'map':
         return <SafetyMap />;
       case 'emergency':
         return <EmergencyPanel />;
-      case 'transport':
-        return <SmartTransportation />;
-      case 'wallet':
-        return <DigitalTravelWallet />;
-      case 'health':
-        return <AdvancedHealthMonitoring />;
-      case 'ai':
-        return <AIPoweredTravelAssistant />;
       default:
         return (
           <div className="space-y-6">
+            {/* Emergency SOS Button */}
+            <Card className="glass-card p-4 border-danger/30 bg-danger/5">
+              <Button 
+                className="w-full h-16 bg-danger hover:bg-danger/90 text-white font-bold text-lg"
+                onClick={() => setActiveTab('emergency')}
+              >
+                <Phone className="h-6 w-6 mr-3" />
+                🚨 EMERGENCY SOS
+              </Button>
+              <p className="text-center text-xs text-muted-foreground mt-2">
+                Tap for immediate emergency assistance
+              </p>
+            </Card>
+
+            {/* Tourist Profile Details */}
+            <Card className="glass-card p-6">
+              <div className="flex items-center space-x-4 mb-4">
+                <Avatar className="h-16 w-16">
+                  <AvatarImage src="/placeholder.svg" alt="Tourist" />
+                  <AvatarFallback className="bg-accent/20 text-accent text-lg font-semibold">
+                    JS
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <h2 className="text-xl font-semibold text-foreground">John Smith</h2>
+                  <p className="text-muted-foreground">Tourist • USA</p>
+                  <div className="flex items-center mt-2 text-sm text-muted-foreground">
+                    <Globe className="h-4 w-4 mr-1" />
+                    Visiting India • 5 days remaining
+                  </div>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border/30">
+                <div className="text-center">
+                  <div className="text-lg font-semibold text-accent">3</div>
+                  <div className="text-xs text-muted-foreground">Cities Visited</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-semibold text-accent">12</div>
+                  <div className="text-xs text-muted-foreground">Places Checked</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-semibold text-accent">95%</div>
+                  <div className="text-xs text-muted-foreground">Safety Score</div>
+                </div>
+              </div>
+            </Card>
+
             {/* Safety Score Card */}
             <Card className="glass-card p-6">
               <div className="flex items-center justify-between mb-4">
@@ -93,10 +123,6 @@ const TouristDashboard = () => {
             <Card className="glass-card p-6">
               <h2 className="text-xl font-semibold text-foreground mb-4">Quick Actions</h2>
               <div className="grid grid-cols-2 gap-4">
-                <Button className="btn-danger flex items-center space-x-2 h-14">
-                  <Phone className="h-5 w-5" />
-                  <span>SOS Emergency</span>
-                </Button>
                 <Button className="btn-accent flex items-center space-x-2 h-14">
                   <Navigation className="h-5 w-5" />
                   <span>Find Help</span>
@@ -107,7 +133,11 @@ const TouristDashboard = () => {
                 </Button>
                 <Button className="btn-primary flex items-center space-x-2 h-14">
                   <Heart className="h-5 w-5" />
-                  <span>Health Check</span>
+                  <span>Check Nearby</span>
+                </Button>
+                <Button className="btn-primary flex items-center space-x-2 h-14">
+                  <Users className="h-5 w-5" />
+                  <span>Local Guide</span>
                 </Button>
               </div>
             </Card>
