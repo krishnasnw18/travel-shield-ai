@@ -211,59 +211,16 @@ const TouristDashboard = () => {
       default:
         return (
           <div className="space-y-6">
-            {/* Tourist Profile Summary */}
-            <Card className="glass-card p-6 border-accent/20">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-foreground">Welcome Back!</h2>
-                <Badge variant="secondary" className="bg-accent/20 text-accent">
-                  <div className="w-2 h-2 bg-accent rounded-full mr-2 animate-pulse"></div>
-                  Active Trip
-                </Badge>
-              </div>
-              
-              <div className="flex items-center space-x-4 mb-4">
-                <Avatar className="h-16 w-16 ring-2 ring-accent/20">
-                  <AvatarImage src="/placeholder.svg" alt="Tourist" />
-                  <AvatarFallback className="bg-accent/20 text-accent text-lg font-semibold">
-                    JS
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-foreground">John Smith</h3>
-                  <p className="text-muted-foreground">Tourist • USA</p>
-                  <div className="flex items-center mt-2 text-sm text-muted-foreground">
-                    <Globe className="h-4 w-4 mr-1" />
-                    Visiting India • 5 days remaining
-                  </div>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border/30">
-                <div className="text-center p-2 rounded-lg bg-accent/10">
-                  <div className="text-lg font-bold text-accent">3</div>
-                  <div className="text-xs text-muted-foreground">Cities Visited</div>
-                </div>
-                <div className="text-center p-2 rounded-lg bg-accent/10">
-                  <div className="text-lg font-bold text-accent">12</div>
-                  <div className="text-xs text-muted-foreground">Places Checked</div>
-                </div>
-                <div className="text-center p-2 rounded-lg bg-accent/10">
-                  <div className="text-lg font-bold text-accent">95%</div>
-                  <div className="text-xs text-muted-foreground">Safety Score</div>
-                </div>
-              </div>
-            </Card>
-
             {/* Emergency SOS Button */}
             <div className="flex justify-center">
               <div className="relative">
                 <Button 
-                  className="w-20 h-20 rounded-full bg-gradient-to-r from-danger to-danger/80 hover:from-danger/90 hover:to-danger/70 text-white font-bold shadow-2xl border-4 border-white/20 pulse"
+                  className="w-24 h-24 rounded-full bg-gradient-to-r from-danger to-danger/80 hover:from-danger/90 hover:to-danger/70 text-white font-bold shadow-2xl border-4 border-white/20 pulse"
                   onClick={() => setActiveTab('emergency')}
                 >
                   <div className="flex flex-col items-center">
-                    <Phone className="h-6 w-6 animate-pulse" />
-                    <span className="text-xs mt-1">SOS</span>
+                    <Phone className="h-7 w-7 animate-pulse" />
+                    <span className="text-sm mt-1">SOS</span>
                   </div>
                 </Button>
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
