@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { MapPin, Shield, AlertTriangle, Phone, Cloud, Navigation, Heart, Users, Star, User, Calendar, Globe } from 'lucide-react';
+import { MapPin, Shield, AlertTriangle, Phone, Cloud, Navigation, Heart, Users, Star, User, Calendar, Globe, Settings, Bell, Camera, Edit, Mail, CreditCard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Switch } from '@/components/ui/switch';
 import WeatherWidget from './WeatherWidget';
 import SafetyMap from './SafetyMap';
 import EmergencyPanel from './EmergencyPanel';
@@ -15,6 +17,7 @@ const TouristDashboard = () => {
     { id: 'dashboard', label: 'Dashboard', icon: Shield },
     { id: 'map', label: 'Map', icon: MapPin },
     { id: 'emergency', label: 'Emergency', icon: AlertTriangle },
+    { id: 'profile', label: 'Profile', icon: User },
   ];
 
   const renderContent = () => {
@@ -23,34 +26,224 @@ const TouristDashboard = () => {
         return <SafetyMap />;
       case 'emergency':
         return <EmergencyPanel />;
+      case 'profile':
+        return (
+          <div className="space-y-6">
+            {/* Profile Header */}
+            <Card className="glass-card p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold text-foreground">My Profile</h2>
+                <Button size="sm" className="btn-accent">
+                  <Edit className="h-4 w-4 mr-2" />
+                  Edit
+                </Button>
+              </div>
+              
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="relative">
+                  <Avatar className="h-20 w-20">
+                    <AvatarImage src="/placeholder.svg" alt="John Smith" />
+                    <AvatarFallback className="bg-accent/20 text-accent text-xl font-bold">
+                      JS
+                    </AvatarFallback>
+                  </Avatar>
+                  <button className="absolute -bottom-1 -right-1 w-6 h-6 bg-accent rounded-full flex items-center justify-center">
+                    <Camera className="h-3 w-3 text-accent-foreground" />
+                  </button>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-foreground">John Smith</h3>
+                  <p className="text-muted-foreground">Tourist • Digital Nomad</p>
+                  <div className="flex items-center mt-2">
+                    <Badge variant="secondary" className="mr-2">
+                      <Globe className="h-3 w-3 mr-1" />
+                      USA
+                    </Badge>
+                    <Badge variant="outline">
+                      Verified Tourist
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border/30">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent">3</div>
+                  <div className="text-xs text-muted-foreground">Cities</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent">12</div>
+                  <div className="text-xs text-muted-foreground">Places</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent">95%</div>
+                  <div className="text-xs text-muted-foreground">Safety</div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Personal Information */}
+            <Card className="glass-card p-6">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Personal Information</h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Mail className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Email</p>
+                      <p className="text-sm text-muted-foreground">john.smith@email.com</p>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="ghost">Edit</Button>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Phone className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Emergency Contact</p>
+                      <p className="text-sm text-muted-foreground">+1 (555) 123-4567</p>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="ghost">Edit</Button>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Calendar className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Trip Duration</p>
+                      <p className="text-sm text-muted-foreground">Dec 10 - Dec 20, 2024</p>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="ghost">Edit</Button>
+                </div>
+              </div>
+            </Card>
+
+            {/* Safety Preferences */}
+            <Card className="glass-card p-6">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Safety Preferences</h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-foreground">Emergency Notifications</p>
+                    <p className="text-xs text-muted-foreground">Get alerts about safety incidents</p>
+                  </div>
+                  <Switch defaultChecked />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-foreground">Location Sharing</p>
+                    <p className="text-xs text-muted-foreground">Share location with emergency contacts</p>
+                  </div>
+                  <Switch defaultChecked />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-foreground">Auto Check-in</p>
+                    <p className="text-xs text-muted-foreground">Automatic safety check-ins</p>
+                  </div>
+                  <Switch />
+                </div>
+              </div>
+            </Card>
+
+            {/* Travel History */}
+            <Card className="glass-card p-6">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Recent Travel History</h3>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3 p-3 rounded-lg bg-secondary/20">
+                  <MapPin className="h-5 w-5 text-accent" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">New Delhi, India</p>
+                    <p className="text-xs text-muted-foreground">Currently visiting • 5 days</p>
+                  </div>
+                  <Badge variant="secondary">Active</Badge>
+                </div>
+                
+                <div className="flex items-center space-x-3 p-3 rounded-lg bg-secondary/10">
+                  <MapPin className="h-5 w-5 text-muted-foreground" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">Mumbai, India</p>
+                    <p className="text-xs text-muted-foreground">Dec 5-8, 2024 • 3 days</p>
+                  </div>
+                  <Badge variant="outline">Completed</Badge>
+                </div>
+                
+                <div className="flex items-center space-x-3 p-3 rounded-lg bg-secondary/10">
+                  <MapPin className="h-5 w-5 text-muted-foreground" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">Goa, India</p>
+                    <p className="text-xs text-muted-foreground">Dec 1-4, 2024 • 4 days</p>
+                  </div>
+                  <Badge variant="outline">Completed</Badge>
+                </div>
+              </div>
+            </Card>
+
+            {/* Account Settings */}
+            <Card className="glass-card p-6">
+              <h3 className="text-lg font-semibold text-foreground mb-4">Account Settings</h3>
+              <div className="space-y-3">
+                <Button variant="ghost" className="w-full justify-start">
+                  <Settings className="h-4 w-4 mr-3" />
+                  App Preferences
+                </Button>
+                <Button variant="ghost" className="w-full justify-start">
+                  <Bell className="h-4 w-4 mr-3" />
+                  Notification Settings
+                </Button>
+                <Button variant="ghost" className="w-full justify-start">
+                  <Shield className="h-4 w-4 mr-3" />
+                  Privacy & Security
+                </Button>
+                <Button variant="ghost" className="w-full justify-start text-danger">
+                  <AlertTriangle className="h-4 w-4 mr-3" />
+                  Emergency Contacts
+                </Button>
+              </div>
+            </Card>
+          </div>
+        );
       default:
         return (
           <div className="space-y-6">
             {/* Emergency SOS Button */}
-            <Card className="glass-card p-4 border-danger/30 bg-danger/5">
+            <Card className="glass-card p-4 border-danger/30 bg-danger/5 shadow-lg">
               <Button 
-                className="w-full h-16 bg-danger hover:bg-danger/90 text-white font-bold text-lg"
+                className="w-full h-16 bg-gradient-to-r from-danger to-danger/80 hover:from-danger/90 hover:to-danger/70 text-white font-bold text-lg shadow-lg border-0 pulse"
                 onClick={() => setActiveTab('emergency')}
               >
-                <Phone className="h-6 w-6 mr-3" />
+                <Phone className="h-6 w-6 mr-3 animate-pulse" />
                 🚨 EMERGENCY SOS
               </Button>
               <p className="text-center text-xs text-muted-foreground mt-2">
-                Tap for immediate emergency assistance
+                Tap for immediate emergency assistance • Available 24/7
               </p>
             </Card>
 
-            {/* Tourist Profile Details */}
-            <Card className="glass-card p-6">
+            {/* Tourist Profile Summary */}
+            <Card className="glass-card p-6 border-accent/20">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-foreground">Welcome Back!</h2>
+                <Badge variant="secondary" className="bg-accent/20 text-accent">
+                  <div className="w-2 h-2 bg-accent rounded-full mr-2 animate-pulse"></div>
+                  Active Trip
+                </Badge>
+              </div>
+              
               <div className="flex items-center space-x-4 mb-4">
-                <Avatar className="h-16 w-16">
+                <Avatar className="h-16 w-16 ring-2 ring-accent/20">
                   <AvatarImage src="/placeholder.svg" alt="Tourist" />
                   <AvatarFallback className="bg-accent/20 text-accent text-lg font-semibold">
                     JS
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-foreground">John Smith</h2>
+                  <h3 className="text-xl font-semibold text-foreground">John Smith</h3>
                   <p className="text-muted-foreground">Tourist • USA</p>
                   <div className="flex items-center mt-2 text-sm text-muted-foreground">
                     <Globe className="h-4 w-4 mr-1" />
@@ -60,16 +253,16 @@ const TouristDashboard = () => {
               </div>
               
               <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border/30">
-                <div className="text-center">
-                  <div className="text-lg font-semibold text-accent">3</div>
+                <div className="text-center p-2 rounded-lg bg-accent/10">
+                  <div className="text-lg font-bold text-accent">3</div>
                   <div className="text-xs text-muted-foreground">Cities Visited</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-lg font-semibold text-accent">12</div>
+                <div className="text-center p-2 rounded-lg bg-accent/10">
+                  <div className="text-lg font-bold text-accent">12</div>
                   <div className="text-xs text-muted-foreground">Places Checked</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-lg font-semibold text-accent">95%</div>
+                <div className="text-center p-2 rounded-lg bg-accent/10">
+                  <div className="text-lg font-bold text-accent">95%</div>
                   <div className="text-xs text-muted-foreground">Safety Score</div>
                 </div>
               </div>
